@@ -2,6 +2,15 @@
 import urllib2
 from bs4 import BeautifulSoup
 from building import Building
+import filecmp
+
+
+def checkIfThereAreChanges(Building):
+    if filecmp.cmp(Building.input, Building.output):
+        print("Don't worry. Nothing has changed in "+str(Building.input))
+    else:
+        print("O.o Something has not changed in "+str(Building.input))
+
 
 def saveToTxtFile(nameFile, array):
 
@@ -9,6 +18,7 @@ def saveToTxtFile(nameFile, array):
         for item in array:
             f.write("%s\n" % item)
         f.write("%s\n" % len(array))
+
 
 def checkBuilding(Building):
 
@@ -35,10 +45,13 @@ def checkBuilding(Building):
 
 
 if __name__ == "__main__":
-    building1 = Building("http://centralparkapartments.pl/cpa2/znajdz-mieszkanie/budynek-b/#lista-mieszkn",'building_b.txt','building_b.txt')
-    building2 = Building("http://centralparkapartments.pl/cpa2/znajdz-mieszkanie/budynek-b1/#lista-mieszkn",'building_b1.txt','building_b1.txt')
-    building3 = Building("http://centralparkapartments.pl/cpa3/budynek-d1/#lista-mieszkan",'building_d1.txt','building_d1.txt')
+    building1 = Building("http://centralparkapartments.pl/cpa2/znajdz-mieszkanie/budynek-b/#lista-mieszkn",'building_b.txt','newBuilding_b.txt')
+    building2 = Building("http://centralparkapartments.pl/cpa2/znajdz-mieszkanie/budynek-b1/#lista-mieszkn",'building_b1.txt','newBuilding_b1.txt')
+    building3 = Building("http://centralparkapartments.pl/cpa3/budynek-d1/#lista-mieszkan",'building_d1.txt','newBuilding_d1.txt')
 
     checkBuilding(building1)
     checkBuilding(building2)
     checkBuilding(building3)
+    checkIfThereAreChanges(building1)
+    checkIfThereAreChanges(building2)
+    checkIfThereAreChanges(building3)

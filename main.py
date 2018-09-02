@@ -3,6 +3,12 @@ import urllib2
 from bs4 import BeautifulSoup
 from building import Building
 
+def saveToTxtFile(nameFile, array):
+
+    with open(nameFile, "w") as f:
+        for item in array:
+            f.write("%s\n" % item)
+        f.write("%s\n" % len(array))
 
 def checkBuilding(Building):
 
@@ -23,6 +29,9 @@ def checkBuilding(Building):
                 if(float(rowWithMeters) >= 40.00 and float(rowWithMeters) <= 50.00):
                     data.append([ele for ele in cols if ele]) # Get rid of empty values
         print(len(data))
+        saveToTxtFile(Building.output, data)
+
+
 
 
 if __name__ == "__main__":

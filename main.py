@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from building import Building
 import filecmp
 import config
+import time
 
 def checkIfThereAreChanges(Building):
     if filecmp.cmp(Building.input, Building.output):
@@ -38,7 +39,7 @@ def checkBuilding(Building):
                 rowWithMeters = str(cols[2]).replace("m2", "")
                 if(float(rowWithMeters) >= 40.00 and float(rowWithMeters) <= 50.00):
                     data.append([ele for ele in cols if ele]) # Get rid of empty values
-        print(len(data))
+
         saveToTxtFile(Building.output, data)
 
 
@@ -46,6 +47,8 @@ def checkBuilding(Building):
 
 if __name__ == "__main__":
 
-    for building in config.arrayBuildings:
-        checkBuilding(building)
-        checkIfThereAreChanges(building)
+    while True:
+        for building in config.arrayBuildings:
+            checkBuilding(building)
+            checkIfThereAreChanges(building)
+        time.sleep(3600)

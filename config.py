@@ -5,3 +5,7 @@ building2 = Building("http://centralparkapartments.pl/cpa2/znajdz-mieszkanie/bud
 building3 = Building("http://centralparkapartments.pl/cpa3/budynek-d1/#lista-mieszkan",'building_d1.txt','newBuilding_d1.txt')
 
 arrayBuildings = [building1, building2, building3]
+
+EMAIL_ADDRESS = ""
+EMAIL_ADDRESS_TO_SEND = ""
+PASSWORD = ""

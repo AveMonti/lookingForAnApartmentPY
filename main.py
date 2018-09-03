@@ -5,12 +5,15 @@ from building import Building
 import filecmp
 import config
 import time
+import datetime
+from sendMail import send_email
 
 def checkIfThereAreChanges(Building):
     if filecmp.cmp(Building.input, Building.output):
         print("Don't worry. Nothing has changed in "+str(Building.input))
     else:
         print("O.o Something has not changed in "+str(Building.input))
+        send_email("Someone bought a house","O.o Something has not changed in file "+str(Building.input))
 
 
 def saveToTxtFile(nameFile, array):
@@ -43,12 +46,11 @@ def checkBuilding(Building):
         saveToTxtFile(Building.output, data)
 
 
-
-
 if __name__ == "__main__":
 
     while True:
         for building in config.arrayBuildings:
             checkBuilding(building)
             checkIfThereAreChanges(building)
+        print(datetime.datetime.now())
         time.sleep(3600)

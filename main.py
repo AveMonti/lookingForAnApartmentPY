@@ -13,7 +13,7 @@ def checkIfThereAreChanges(Building):
         print("Don't worry. Nothing has changed in "+str(Building.input))
     else:
         print("O.o Something has not changed in "+str(Building.input))
-        send_email("Someone bought a house","O.o Something has not changed in file "+str(Building.input))
+        send_email("Someone bought a house"+str(datetime.datetime.now()),"O.o Something has not changed in file "+str(Building.input))
 
 
 def saveToTxtFile(nameFile, array):

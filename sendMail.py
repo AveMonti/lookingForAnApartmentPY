@@ -14,9 +14,3 @@ def send_email(subject, msg):
         print("Success: Email sent!")
     except:
         print("Email failed to send.")
-
-
-# subject = "Test subject"
-# msg = "Hello there, how are you today?"
-#
-# send_email(subject, msg)

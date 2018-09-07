@@ -9,3 +9,5 @@ arrayBuildings = [building1, building2, building3]
 EMAIL_ADDRESS = ""
 EMAIL_ADDRESS_TO_SEND = ""
 PASSWORD = ""
+SUBJECT = "Somebody bought flat : /"
+MESSAGE = "CHECK TXT files"

@@ -6,14 +6,23 @@ import filecmp
 import config
 import time
 import datetime
-from sendMail import send_email
+from sendMail import send_mail
 
 def checkIfThereAreChanges(Building):
     if filecmp.cmp(Building.input, Building.output):
         print("Don't worry. Nothing has changed in "+str(Building.input))
     else:
         print("O.o Something has not changed in "+str(Building.input))
-        send_email("Someone bought a house"+str(datetime.datetime.now()),"O.o Something has not changed in file "+str(Building.input))
+
+        if (send_mail(config.EMAIL_ADDRESS, config.EMAIL_ADDRESS_TO_SEND, config.SUBJECT, config.MESSAGE, files=[Building.input, Building.output], server="smtp.gmail.com", port=587, username=config.EMAIL_ADDRESS, password=config.PASSWORD)):
+            with open(Building.output) as f:
+                with open(Building.input, "w") as f1:
+                    for line in f:
+                        f1.write(line)
+            print("ok")
+        else:
+            print("nie ok")
+            return
 
 
 def saveToTxtFile(nameFile, array):
@@ -48,9 +57,8 @@ def checkBuilding(Building):
 
 if __name__ == "__main__":
 
-    while True:
-        for building in config.arrayBuildings:
-            checkBuilding(building)
-            checkIfThereAreChanges(building)
-        print(datetime.datetime.now())
-        time.sleep(3600)
+    for building in config.arrayBuildings:
+        checkBuilding(building)
+        checkIfThereAreChanges(building)
+    print(datetime.datetime.now())
+    
